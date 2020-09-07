@@ -2,23 +2,23 @@
     let pin = async () => {
 
         alert(`正尋找最新的ipfs Hash`);
-        let ipnsKey = '/ipns/12D3KooWRv7RLxnxzvwnXjVKocanNmwQVo95ZEnYCGSJA4RpnsFy';
+        let ipnsKey = '/ipns/QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB';
         let ipnsRecBase64 = await getDHTRecord(ipnsKey);
         console.log(ipnsRecBase64);
         putDHTRecord(ipnsKey, base64ToBlob(ipnsRecBase64));
 
-        let pkKey = '/pk/12D3KooWRv7RLxnxzvwnXjVKocanNmwQVo95ZEnYCGSJA4RpnsFy';
+        let pkKey = '/pk/QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB';
         let pkBase64 = await getDHTRecord(pkKey);
         console.log(pkBase64);
         putDHTRecord(pkKey, base64ToBlob(pkBase64));
 
-        resp = await fetch('http://127.0.0.1:5001/api/v0/name/resolve?arg=12D3KooWRv7RLxnxzvwnXjVKocanNmwQVo95ZEnYCGSJA4RpnsFy', {
+        resp = await fetch('/api/v0/name/resolve?arg=QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB', {
             method: 'post'
         });
         let json = await resp.json();
         let ipfsPath = json.Path;
         alert(`正在pin${ipfsPath}`);
-        resp = await fetch(`http://127.0.0.1:5001/api/v0/pin/add?arg=${ipfsPath}`, {
+        resp = await fetch(`/api/v0/pin/add?arg=${ipfsPath}`, {
             method: 'post'
         });
         json = await resp.json();
