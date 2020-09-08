@@ -2,15 +2,19 @@
     let pin = async () => {
 
         alert(`正尋找最新的ipfs Hash`);
+
+
+        let pkKey = '/pk/QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB';
+        // let pkBase64 = await getDHTRecord(pkKey);
+        // console.log(pkBase64);
+        let pkBase64 = 'CAASpgIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCftnVXOr5qF/ahDR5Fm42O6axLJPuQHNN9v6UXyoGmRL6idbhxok9wXt4AYKWcsMszGcwMJnw9bWmFnCJ8zg5PUvfCT2ceqXL6UBn9QB7SfUSSgPcDm1j1VYXnwLeG/ffbRx8i69efUwbyubZ3YcoFq7f6Wfo6VX9gZOPwTwBZWdZOowRVbXhgd379/ZDb5eUEWaI4JDWJdoApaxk79QocAvXdghFPXnGrpuqI7IVE0HiRfoSs3IV9G1lCPTAnLZ6eVuSphAYp1JsmORerdmroM1ZZlxTFKQE/stMZAjJ0xpC87hcDq3baVCqV4mN4WIgUpiLHUc5lQgtpQKzYUf0ZAgMBAAE=';
+        console.log(await putDHTRecord(pkKey, base64ToBlob(pkBase64)));
+
         let ipnsKey = '/ipns/QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB';
         let ipnsRecBase64 = await getDHTRecord(ipnsKey);
         console.log(ipnsRecBase64);
-        putDHTRecord(ipnsKey, base64ToBlob(ipnsRecBase64));
+        console.log(await putDHTRecord(ipnsKey, base64ToBlob(ipnsRecBase64)));
 
-        let pkKey = '/pk/QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB';
-        let pkBase64 = await getDHTRecord(pkKey);
-        console.log(pkBase64);
-        putDHTRecord(pkKey, base64ToBlob(pkBase64));
 
         resp = await fetch('/api/v0/name/resolve?arg=QmSeJ41iXwebzm3KPTixBc3zoetBD61df76BRjE4RuY4YB', {
             method: 'post'
@@ -73,6 +77,7 @@
     }
 
     function base64ToBlob(strBase64) {
+        strBase64 = atob(strBase64);
         let byteNumbers = new Array(strBase64.length);
         for (let i = 0; i < strBase64.length; i++) {
             byteNumbers[i] = strBase64.charCodeAt(i);
