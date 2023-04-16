@@ -1,1 +1,1 @@
-cd ../ && zip -r ipfs_ext.zip ./ipfs_ext -x '*.git*'
+zip -r ./ipfs_ext.zip . -x '*.git*' -x './dist/*' -x 'ipfs_ext.zip'

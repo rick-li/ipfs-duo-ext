@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Duosuccess ipfs plugin",
     "description": "Pin IPFS .",
-    "version": "1.2",
+    "version": "1.4",
 
     "icons": {
         "16": "16.png",
@@ -10,12 +10,16 @@
         "128": "128.png"
     },
     "permissions": [
+        "*://localhost:*/*",
         "*://127.0.0.1:*/*"
     ],
-
+    "background": {
+        "scripts": ["background.js"]
+    },
     "content_scripts": [{
-        "matches": ["*://127.0.0.1:*/*"],
+        "matches": ["*://localhost:*/*","*://127.0.0.1:*/*"],
         "js": ["ipfs.js"],
+        
         "run_at": "document_idle"
     }]
 }
